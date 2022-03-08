@@ -14,8 +14,7 @@ CREATE TABLE Company (
     image VARCHAR(255)
   
 );
-// Company_name , postal_code,address  ,telephone_number, 
-        // email_address,HP_URL  ,date_establishment ,remarks ,image
+
 
 CREATE TABLE Employee (
     Employee_id SERIAL PRIMARY KEY,
@@ -33,7 +32,6 @@ CREATE TABLE Employee (
 
 ); 
 
-Employee_number ,department,Employee_name ,zip_code ,Employee_address ,telephone_numbe, date_birth ,remarks ,profile_image 
 
 
 CREATE TABLE Users (
@@ -49,5 +47,4 @@ CREATE TABLE  Account_privilege{
      account INT foreign  KEY REFERENCES Users(Id)
 }
 
--- system administrator, administrative, and
--- -- general
+
