@@ -1,5 +1,5 @@
 const router = require("express").Router();
-
+const pool = require("../db");
 
 
 
@@ -12,8 +12,8 @@ router.post("/", async (req, res) => {
       const { number ,department,name ,zip_code ,address ,telephoneNumbe, dateBirth ,remarks ,company  } = req.body;
       
       const newEmployee = await pool.query(
-        "INSERT INTO  Employee (Employee_number ,department,Employee_name ,zip_code ,Employee_address ,telephone_numbe, date_birth ,remarks,Company ) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9) RETURNING *",
-        [number ,department,name ,zip_code ,address ,telephoneNumbe, dateBirth ,remarks ,company ]
+        "INSERT INTO  Employee (Employee_number ,department,Employee_name ,zip_code ,Employee_address ,telephone_number, date_birth ,remarks ) VALUES($1,$2,$3,$4,$5,$6,$7,$8) RETURNING *",
+        [number ,department,name ,zip_code ,address ,telephoneNumbe, dateBirth ,remarks  ]
       );
   
         res.json( newEmployee.rows);
@@ -21,6 +21,7 @@ router.post("/", async (req, res) => {
       console.error(err.message);
     }
   });
+
   router.post('/getImg', (req, res) => {
     let imgFile;
     let uploadPath;
@@ -64,6 +65,8 @@ router.post("/", async (req, res) => {
       console.error(err.message);
     }
   });
+
+
    //get all Employee name company numbar auth
   router.get("/table", async (req, res) => {
     try {
@@ -98,8 +101,8 @@ router.post("/", async (req, res) => {
         const { id } = req.params;
         const {number ,department,name ,zip_code ,address ,telephoneNumbe, dateBirth ,remarks ,company } = req.body;
         const updateEmployee = await pool.query(
-          "UPDATE Employee SET number =$1,department=$2,name=$3 ,zip_code=$4 ,address=$4 ,telephoneNumbe=$5, dateBirth=$6,remarks=$7,company=$8 WHERE Employee_id = $9",
-          [number ,department,name ,zip_code ,address ,telephoneNumbe, dateBirth ,remarks ,company, id]
+          "UPDATE Employee SET Employee_number =$1,department=$2,Employee_name=$3 ,zip_code=$4 ,Employee_address=$5 ,telephone_number=$6, date_birth=$7,remarks=$8 WHERE Employee_id = $9",
+          [number ,department,name ,zip_code ,address ,telephoneNumbe, dateBirth ,remarks , id]
         );
     
         res.json("Employee was updated!");

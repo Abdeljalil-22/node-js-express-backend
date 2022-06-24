@@ -6,13 +6,14 @@ const fileUpload = require('express-fileupload');
 const employe =require("./routers/Employe");
 const auth =require("./routers/Auth");
 const company = require("./routers/Company");
+const {authUser,authRole }=require('./routers/verifyToken');
 
 
 
 //middleware
 app.use(cors());
 app.use(express.json()); //req.body
-app.use("/employe",employe);
+app.use("/employe",authUser,employe);
 app.use("/company",company);
 app.use("/",auth);
 app.use(fileUpload());
