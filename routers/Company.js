@@ -15,6 +15,7 @@ router.post('/getImg',setImg );
   //get all Company
   
 router.get("/",authUser,authRole('admin'),getAllCompany );
+//,authRole('admin')
 
 
    //get all Company name id

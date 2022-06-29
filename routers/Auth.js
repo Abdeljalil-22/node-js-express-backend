@@ -23,7 +23,7 @@ router.post("/login",async(req,res)=>{
          where usre_email = $1 and  _Password=$2  ; `
         ,
         [email,password]);
-        //--
+        
         
 
         //console.log(emailExist.rows[0]);
@@ -31,8 +31,8 @@ router.post("/login",async(req,res)=>{
         if(!emailExist.rows[0])
         { return res.status(400).json("email or password is wrong");}
 
-            const token = jwt.sign({id:emailExist.rows[0].usre_email ,role: emailExist.rows[0].privilege},process.env.TOKEN_KEY)
-            res.header('auth_token',token).json('login');
+        const token = jwt.sign({id:emailExist.rows[0].usre_email ,role: emailExist.rows[0].privilege},process.env.TOKEN_KEY,{expiresIn: '30d',})
+        res.status(200).json({'token':token});
           
 
        

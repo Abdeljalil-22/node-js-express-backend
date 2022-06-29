@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const pool = require("../db");
 const fileUpload = require('express-fileupload');
-const {authUser,authRole }=require('./verifyToken');
+//const {authUser,authRole }=require('./verifyToken');
 
 
 

@@ -1,20 +1,27 @@
-    const jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
+require('dotenv').config();
 
-    require('dotenv').config()
 
- function authUser (req,res,next){
+function  authUser  (req,res,next){
 
-const token = req.header("auth_token");
-if (!token) return res.status(401).json("Access Denied")
+let token ;
 
+if (
+  req.headers.authorization &&
+  req.headers.authorization.startsWith('Bearer')
+)
 try{
+  token = req.headers.authorization.split(' ')[1];
 const verified = jwt.verify(token,process.env.TOKEN_KEY);
 res.user= verified;
 next()
 }catch(err){
-    res.status(400).json("Invalid Token");
+  console.log(err);
+    res.status(401).json("Invalid Token");
 
 }
+
+if (!token) return res.status(401).json("Access Denied")
 }
 
 
@@ -22,7 +29,7 @@ function authRole(role) {
     
     return (req, res, next) => {
         
-const token = req.header("auth_token");
+const token = req.headers.authorization.split(' ')[1];
         const verified = jwt.verify(token,process.env.TOKEN_KEY);
       if ( verified.role !== role) {
         

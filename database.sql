@@ -32,7 +32,6 @@ CREATE TABLE Employee (
 
 ); 
 
-Employee_number ,department,Employee_name ,zip_code ,Employee_address ,telephone_numbe, date_birth ,remarks ,profile_image 
 
 
 CREATE TABLE Users (
@@ -48,6 +47,7 @@ CREATE TABLE  Account_privilege(
      account INT 
 );
 
+<<<<<<< HEAD
 -- system administrator, administrative, and
 -- -- general
 SELECT users.Id , Account_privilege.privilege , users.usre_email  
@@ -67,3 +67,6 @@ SELECT users.Id , Account_privilege.privilege , users.usre_email
 
 // Company_name , postal_code,address  ,telephone_number, 
         // email_address,HP_URL  ,date_establishment ,remarks ,image
+=======
+
+>>>>>>> d6265fde5107729a21b4cb07e038fa3d225e414c
