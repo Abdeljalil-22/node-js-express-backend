@@ -11,9 +11,9 @@ const app = express();
 //middleware
 app.use(cors());
 app.use(express.json()); //req.body
-app.use("api/v1/employe",authUser,employe);
-app.use("api/v1/company",authUser,company);
-app.use("api/v1/",auth);
+app.use("/api/v1/employe",authUser,employe);
+app.use("/api/v1/company",authUser,company);
+app.use("/api/v1/",auth);
 app.use(fileUpload());
   
 
