@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const pool = require("../db");
+const pool = require("../config/db");
 const fileUpload = require('express-fileupload');
 //const {authUser,authRole }=require('./verifyToken');
 
@@ -11,13 +11,13 @@ const createCompany =async (req, res) => {
     try {
       
   
-      const { nome,postalCode,address,telephoneNumber,emailAddress,HPURL,dateEstablishment,remarks } = req.body;
+      const { name,postalCode,address,telephoneNumber,emailAddress,HPURL,dateEstablishment,remarks } = req.body;
       //console.log(nome,postalCode,address,telephoneNumber,emailAddress,HPURL,dateEstablishment,remarks,image);
       const newCompany = await pool.query(
-        `INSERT INTO company (Company_name , postal_code,address  ,telephone_number
+        `INSERT INTO company (company_name , postal_code,address  ,telephone_number
           , email_address,HP_URL ,date_establishment ,remarks ) 
-        VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9) RETURNING *`,
-        [nome,postalCode,address,telephoneNumber,emailAddress,HPURL,dateEstablishment,remarks]
+        VALUES($1,$2,$3,$4,$5,$6,$7,$8) RETURNING *`,
+        [name,postalCode,address,telephoneNumber,emailAddress,HPURL,dateEstablishment,remarks]
       );
   
         res.json( newCompany.rows);
@@ -43,8 +43,9 @@ const getAllCompany =async (req, res) => {
 
 const getCompanyById = async (req, res) => {
     try {
-      const allCompanyNames = await pool.query("SELECT Company_name, Company_id  FROM company");
-      res.json(allCompanyNames.rows);
+      const { id } = req.params;
+      const allCompanyNames = await pool.query("SELECT *  FROM company WHERE company_id = $1",[id]);
+      res.json(allCompanyNames.rows[0]);
       
     } catch (err) {
       console.error(err.message);
@@ -55,10 +56,10 @@ const getCompanyById = async (req, res) => {
 const  updateCompany =async (req, res) => {
     try {
       const { id } = req.params;
-      const { nome,postalCode,address,telephoneNumber,emailAddress,HPURL,dateEstablishment,remarks,image } = req.body;
+      const { name,postalCode,address,telephoneNumber,emailAddress,HPURL,dateEstablishment,remarks,image } = req.body;
       const updateCompany = await pool.query(
         "UPDATE company SET Company_name =$1, postal_code = $2,address =$3  ,telephone_number = $4, email_address =$5,HP_URL =$6 ,date_establishment =$7,remarks =$8 ,image =$9  WHERE company_id = $10",
-        [nome,postalCode,address,telephoneNumber,emailAddress,HPURL,dateEstablishment,remarks,image , id]
+        [name,postalCode,address,telephoneNumber,emailAddress,HPURL,dateEstablishment,remarks,image , id]
       );
   
       res.json("company was updated!");

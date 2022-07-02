@@ -1,26 +1,25 @@
 const router = require("express").Router();
-const pool = require("../db");
 const fileUpload = require('express-fileupload');
-const {authUser,authRole }=require('./verifyToken');
+const {authUser,authRole }=require('../middleware/verifyToken');
 const {getAllCompany,createCompany, setImg, getCompanyById, updateCompany, deleteCompany }=require('../Controllers/Company');
 
 
 router.use(fileUpload());
 //create a Company
 
-router.post("/",authUser,createCompany );
+router.post("/",createCompany );
 
 router.post('/getImg',setImg );
   
   //get all Company
   
-router.get("/",authUser,authRole('admin'),getAllCompany );
+router.get("/",getAllCompany );
 //,authRole('admin')
 
 
    //get all Company name id
 
-router.get("/name",authUser,authRole('admin'),getCompanyById );
+router.get("/name",getCompanyById );
   
 
   //get a Company

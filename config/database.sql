@@ -48,6 +48,7 @@ CREATE TABLE  Account_privilege(
 );
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 -- system administrator, administrative, and
 -- -- general
 SELECT users.Id , Account_privilege.privilege , users.usre_email  
@@ -67,6 +68,9 @@ SELECT users.Id , Account_privilege.privilege , users.usre_email
 
 // Company_name , postal_code,address  ,telephone_number, 
         // email_address,HP_URL  ,date_establishment ,remarks ,image
+=======
+
+>>>>>>> d6265fde5107729a21b4cb07e038fa3d225e414c
 =======
 
 >>>>>>> d6265fde5107729a21b4cb07e038fa3d225e414c
